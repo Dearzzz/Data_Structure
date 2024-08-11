@@ -107,11 +107,11 @@ struct node *insert(struct node *root, struct book book_data)
     }
     if (book_data.id < root->book_data.id)
     {
-        root->left = insertNode(root->left, book_data);
+        root->left = insert(root->left, book_data);
     }
     else if (book_data.id > root->book_data.id)
     {
-        root->right = insertNode(root->right, book_data);
+        root->right = insert(root->right, book_data);
     }
     else
     {
@@ -160,14 +160,14 @@ struct node *delete(struct node *root, int book_id)
     // hapus dari cabang kiri
     if (book_id < root->book_data.id)
     {
-        root->left = deleteNode(root->left, book_id);
+        root->left = delete (root->left, book_id);
     }
 
     // Jika ID buku yang akan dihapus lebih besar dari ID buku pada root,
     // hapus dari cabang kanan
     else if (book_id > root->book_data.id)
     {
-        root->right = deleteNode(root->right, book_id);
+        root->right = delete (root->right, book_id);
     }
     // Jika ID buku yang akan dihapus sama dengan ID buku pada root,
     // ini adalah node yang akan dihapus
@@ -267,7 +267,7 @@ void inorderTraversal(struct node *root)
     if (root != NULL)
     {
         inorderTraversal(root->left);
-        printf("ID Buku: %d, Judul: %s, Penulis: %s\n", root->book_data.id, root->book_data.title, root->book_data.author ? "Ya" : "Tidak");
+        printf("ID Buku: %d, Judul: %s, Penulis: %s\n", root->book_data.id, root->book_data.title, root->book_data.author);
         inorderTraversal(root->right);
     }
 }
